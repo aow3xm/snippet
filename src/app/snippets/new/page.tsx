@@ -1,5 +1,5 @@
 "use client";
-import { createSnippet } from "@/app/actions/createSnippet";
+import { createSnippet } from "@/actions/actions";
 import { useRouter } from "next/navigation";
 
 import React, { useState } from "react";
@@ -9,7 +9,7 @@ interface SnippetFormData {
   code: string;
 }
 
-const CreateNewSnippet: React.FC = () => {
+const CreateNewSnippet = () => {
   const [formData, setFormData] = useState<SnippetFormData>({
     title: "",
     code: "",
@@ -26,9 +26,8 @@ const CreateNewSnippet: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const snippet = await createSnippet(formData);
-    console.log(snippet);
-    router.push("/");
+    const newSnippet = await createSnippet(formData);
+    router.push(`/snippets/${newSnippet.id}`);
   };
 
   const createSnippetForm = () => {

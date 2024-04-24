@@ -1,9 +1,11 @@
+import SearchSnippetInput from "@/components/search-snippet.input";
 import { db } from "@/db";
 import Link from "next/link";
 import React from "react";
 
 const HomePage: React.FC = async () => {
   const snippets = await db.snippet.findMany();
+
   const snippetList = () => {
     return (
       <div className="flex flex-col divide-y divide-gray-200">
@@ -37,7 +39,10 @@ const HomePage: React.FC = async () => {
           Tạo snippet
         </Link>
       </div>
-      <div className="flex flex-col gap-5">{snippetList()}</div>
+      <div className="flex flex-col gap-5">
+        <SearchSnippetInput/>
+        {snippetList()}
+      </div>
     </>
   );
 };
